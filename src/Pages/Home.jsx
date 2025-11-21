@@ -6,8 +6,12 @@ const Home = () => {
   return (
     <div className="px-2 sm:pl-4 w-full relative z-10">
       <div className="flex flex-col justify-center items-center pb-20 sm:pb-0">
+        {/* Main Content Flex Container */}
         <div className="flex flex-col sm:flex-row justify-between sm:gap-20 items-center mt-5 w-full">
-          <div className="relative group sm:pl-20 pt-10 sm:pt-0">
+          {/* --- IMAGE AND ANIMATION SECTION START --- */}
+          {/* Removed padding (sm:pl-20 pt-10) here to ensure true centering relative to the image container */}
+          <div className="relative group flex justify-center items-center mt-10 sm:mt-0">
+            {/* 1. The Profile Image Container */}
             <div className="w-[140px] sm:w-[300px] h-[140px] sm:h-[300px] rounded-full border-4 border-white shadow-2xl relative z-20 overflow-hidden">
               <picture>
                 <img
@@ -18,22 +22,27 @@ const Home = () => {
               </picture>
             </div>
 
+            {/* --- ANIMATIONS (Centered relative to the parent div) --- */}
+
             {/* 2. Rotating Dashed Ring (Outer) */}
-            <div className="absolute top-[200px] left-[220px] -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full border-2 border-dashed border-purple-400/50 animate-[spin_10s_linear_infinite] z-0"></div>
+            {/* Changed top-[200px] left-[220px] to top-1/2 left-1/2 */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full border-2 border-dashed border-purple-400/50 animate-[spin_10s_linear_infinite] z-0"></div>
 
             {/* 3. Reverse Rotating Ring (Inner) */}
-            <div className="absolute top-[200px] left-[220px] -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] rounded-full border border-cyan-400/40 animate-[spin_15s_linear_infinite_reverse] z-0"></div>
+            {/* Changed top-[200px] left-[220px] to top-1/2 left-1/2 */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] rounded-full border border-cyan-400/40 animate-[spin_15s_linear_infinite_reverse] z-0"></div>
 
             {/* 4. Orbiting Planet/Dot */}
-            <div className="absolute top-[200px] left-[220px] -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] animate-[spin_8s_linear_infinite] z-10 pointer-events-none">
+            {/* Changed top-[200px] left-[220px] to top-1/2 left-1/2 */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] animate-[spin_8s_linear_infinite] z-10 pointer-events-none">
               <div className="w-4 h-4 bg-[#ffffff] rounded-full shadow-[0_0_10px_#FDC435] absolute top-0 left-1/2 -translate-x-1/2"></div>
             </div>
 
-            {/* 5. Floating Tech Symbols */}
-            <span className="absolute top-2 -right-5 text-3xl font-bold text-[#EF52FF] animate-bounce z-30 delay-75">
+            {/* 5. Floating Tech Symbols (Adjusted positions slightly for better placement) */}
+            <span className="absolute top-0 right-0 sm:-right-5 text-3xl font-bold text-[#EF52FF] animate-bounce z-30 delay-75">
               {`</>`}
             </span>
-            <span className="absolute bottom-0 -left-[-15px] text-2xl font-bold text-cyan-400 animate-[bounce_3s_infinite] z-30">
+            <span className="absolute bottom-0 left-0 sm:-left-5 text-2xl font-bold text-cyan-400 animate-[bounce_3s_infinite] z-30">
               {`{ }`}
             </span>
 
@@ -42,7 +51,8 @@ const Home = () => {
           </div>
           {/* --- IMAGE SECTION END --- */}
 
-          <div className="flex flex-col justify-end items-center sm:items-end sm:text-right mt-6 sm:mt-0">
+          {/* --- TEXT SECTION --- */}
+          <div className="flex flex-col justify-end items-center sm:items-end sm:text-right mt-16 sm:mt-0">
             <h1 className="text-xl sm:text-6xl font-bold mb-4 text-center sm:text-end">
               Hi, I'm Ranocoder
             </h1>

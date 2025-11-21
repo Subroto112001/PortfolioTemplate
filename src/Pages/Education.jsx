@@ -71,7 +71,7 @@ const Education = () => {
         className="mt-4 block sm:hidden "
         itemContent={(index, item) => (
           <div
-            className="flex flex-col gap-3 bg-[#e6e6fce5] p-5 rounded-lg shadow-lg w-full"
+            className="flex flex-col gap-3 mb-5 bg-[#e6e6fce5] p-5 rounded-lg shadow-lg w-full"
             key={index}
           >
             <h3 className="text-2xl sm:text-3xl flex gap-2 items-center">

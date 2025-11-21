@@ -51,7 +51,7 @@ const Mainpage = () => {
     
       
       <div
-        className={`absolute top-1/2 -translate-y-1/2 right-0 z-30 flex sm:hidden transition-all duration-300 ${
+        className={`absolute top-1/2 -translate-y-1/2 right-[-40px] hover:right-0 z-30 flex sm:hidden transition-all duration-300 ${
           isSidebarOpen
             ? "translate-x-full opacity-0"
             : "translate-x-0 opacity-100"
@@ -61,7 +61,7 @@ const Mainpage = () => {
           ref={toggleRef}
           onClick={handleSlidebarOpen}
           // Updated to #FDC435
-          className="bg-[#FDC435] text-white p-3 rounded-l-2xl shadow-lg shadow-orange-500/20 hover:pl-5 transition-all duration-300 group border border-r-0 border-white/40"
+          className="bg-[#FDC435] text-white p-3 rounded-l-2xl shadow-lg shadow-orange-500/20 transition-all duration-300 group border border-r-0 border-white/40"
         >
           <CgShapeHalfCircle className="text-3xl animate-pulse group-hover:animate-none group-hover:scale-110 transition-transform" />
         </button>

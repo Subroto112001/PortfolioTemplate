@@ -1,6 +1,7 @@
 import React from "react";
 import { HeroImage } from "../Helper/Image";
 import { socialIcon } from "../Helper/Icon";
+import { AuthorInfo } from "../Helper/Info";
 
 const Home = () => {
   return (
@@ -11,8 +12,8 @@ const Home = () => {
             <div className="w-[140px] h-[140px] md:w-[300px] md:h-[300px] lg:w-[250px] lg:h-[250px] xl:w-[400px] xl:h-[400px] rounded-full border-4 border-white shadow-2xl relative z-20 overflow-hidden">
               <picture>
                 <img
-                  src={HeroImage.Author}
-                  alt="Ranocoder"
+                  src={AuthorInfo.image}
+                  alt="Author Image"
                   className="w-full h-full rounded-full object-cover hover:scale-110 transition-transform duration-500"
                 />
               </picture>
@@ -31,7 +32,7 @@ const Home = () => {
             </div>
 
             {/* 5. Floating Tech Symbols (Adjusted positions slightly for better placement) */}
-            <span className="absolute top-0 right-0 md:-right-5 text-3xl font-bold text-[#EF52FF] animate-bounce z-30 delay-75">
+            <span className="absolute top-0 -right-5 md:-right-5 text-2xl md:text-3xl font-bold text-[#EF52FF] animate-bounce z-30 delay-75">
               {`</>`}
             </span>
             <span className="absolute bottom-0 left-0 md:-left-5 text-2xl font-bold text-cyan-400 animate-[bounce_3s_infinite] z-30">
@@ -46,10 +47,10 @@ const Home = () => {
           {/* --- TEXT SECTION --- */}
           <div className="flex flex-col mr-0 md:mr-10 justify-end items-center md:items-end md:text-right mt-16 md:mt-30 w-full md:w-1/2 z-20">
             <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl font-bold mb-4 text-center md:text-end">
-              Hi, I'm Ranocoder
+              Hi, I'm {AuthorInfo.name}
             </h1>
             <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold mb-6 text-center md:text-end">
-              Full Stack Developer
+              {AuthorInfo.role}
             </h2>
 
             <div className="flex flex-col md:flex-row gap-3 items-center justify-center md:justify-end">
@@ -73,12 +74,7 @@ const Home = () => {
             </div>
 
             <p className="mt-6 md:mt-10 text-center text-[14px] md:text-[20px] md:text-end text-gray-900 w-[90%] md:w-full">
-              As a full-stack developer, I specialize in both front-end and
-              back-end technologies. I work with frameworks like React, Node.js,
-              and databases like MongoDB and MySQL. My expertise allows me to
-              create seamless web applications, handling everything from user
-              interfaces to server-side logic and database management for
-              scalable solutions.
+              {AuthorInfo.description}
             </p>
           </div>
         </div>

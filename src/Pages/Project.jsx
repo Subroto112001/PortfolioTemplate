@@ -4,9 +4,10 @@ import { IoClose } from "react-icons/io5";
 
 import { ProjectImage, SkillImage } from "../Helper/Image";
 import { ProjectIcon } from "../Helper/Icon";
-import { ProjectInfo } from "../Helper/Info";
+import {  ProjectInfo } from "../Helper/Info";
 
 const Project = () => {
+  
   const [selectedProject, setSelectedProject] = useState(null);
 
   const handleProjectClick = (index, item) => {

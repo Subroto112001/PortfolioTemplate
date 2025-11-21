@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom"; // <-- ADD useNavigate
+import { useSwipeable } from "react-swipeable"; // <-- ADD useSwipeable
 import Slidebar from "../Component/MainPgae/Slidebar";
 import { slideBarIcon } from "../Helper/Icon";
 import { CgShapeHalfCircle } from "react-icons/cg";
@@ -7,7 +8,10 @@ import { IoClose } from "react-icons/io5";
 
 const Mainpage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false); // State to track mobile view
+
   const location = useLocation();
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const sidebarRef = useRef(null);
   const toggleRef = useRef(null);
@@ -16,7 +20,73 @@ const Mainpage = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  // Click Outside Logic
+  // --- 📱 Responsive Check (Set isMobile) 📱 ---
+  useEffect(() => {
+    // Check screen width against Tailwind's default 'sm' breakpoint (640px)
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // --- 🚀 Swipe Navigation Logic 🚀 ---
+
+  const currentPathIndex = slideBarIcon.findIndex(
+    (item) => item.path === location.pathname
+  );
+
+  const getNextPath = () => {
+    if (
+      currentPathIndex === -1 ||
+      currentPathIndex === slideBarIcon.length - 1
+    ) {
+      return null;
+    }
+    return slideBarIcon[currentPathIndex + 1].path;
+  };
+
+  const getPrevPath = () => {
+    if (currentPathIndex <= 0) {
+      return null;
+    }
+    return slideBarIcon[currentPathIndex - 1].path;
+  };
+
+  // Define swipe configuration
+  const swipeConfig = {
+    // Swiped Left (Go to next page)
+    onSwipedLeft: () => {
+      const nextPath = getNextPath();
+      if (nextPath) navigate(nextPath);
+    },
+    // Swiped Right (Go to previous page or close sidebar)
+    onSwipedRight: () => {
+      if (isSidebarOpen) {
+        // If sidebar is open, swipe right closes it
+        setIsSidebarOpen(false);
+      } else {
+        // If sidebar is closed, swipe right navigates back
+        const prevPath = getPrevPath();
+        if (prevPath) navigate(prevPath);
+      }
+    },
+    // Prevents accidental scrolling when trying to swipe horizontally
+    preventDefaultTouchmoveEvent: true,
+    // Disabling mouse tracking since this is explicitly for touch/mobile
+    trackMouse: false,
+    delta: 50,
+  };
+
+  // Conditionally apply swipe handlers:
+  // If isMobile is true, use the swipeConfig. Otherwise, use an empty object {}
+  const handlers = useSwipeable(isMobile ? swipeConfig : {});
+
+  // --- Standard Side Effects ---
+
+  // Click Outside Logic (Existing)
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!isSidebarOpen) return;
@@ -33,25 +103,36 @@ const Mainpage = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isSidebarOpen]);
 
+  // Close sidebar on route change
+  useEffect(() => {
+    setIsSidebarOpen(false);
+  }, [location.pathname]);
+
   return (
-    <div className="h-screen bg-[#e6e6fce5] relative overflow-hidden font-sans">
+    // Apply swipe handlers {...handlers} to the main container
+    <div
+      {...handlers}
+      className="h-screen bg-[#e6e6fce5] relative overflow-hidden font-sans"
+    >
       <div className="flex justify-between h-full">
         {/* Main Content */}
-        <div className="w-full sm:w-[93%] h-full  scrollbar-hide">
+        <div className="w-full sm:w-[93%] h-full scrollbar-hide">
           <Outlet />
         </div>
 
+        {/* Desktop Sidebar */}
         <div className="hidden sm:block sm:w-[7%] fixed right-0 top-0 h-screen z-10 ">
           <Slidebar />
         </div>
       </div>
 
       <div
-        className={`absolute top-1/2 -translate-y-1/2 right-[-10px] hover:right-0 z-30 flex sm:hidden transition-all duration-300 ${
-          isSidebarOpen
-            ? "translate-x-full opacity-0"
-            : "translate-x-0 opacity-100"
-        }`}
+        className={`absolute top-1/2 -translate-y-1/2 right-[-10px] hover:right-0 z-30 flex sm:hidden transition-all duration-300 
+    ${
+      isSidebarOpen ? "translate-x-full opacity-0" : "translate-x-0 opacity-100"
+    } 
+    animate-[wiggle_1s_ease-in-out_infinite]
+  `}
       >
         <button
           ref={toggleRef}
@@ -63,7 +144,6 @@ const Mainpage = () => {
         </button>
       </div>
 
-      {/* 2. Mobile Sidebar Menu */}
       <div
         ref={sidebarRef}
         className={`absolute right-4 top-1/2 -translate-y-1/2 sm:hidden z-40
@@ -78,7 +158,7 @@ const Mainpage = () => {
           {/* Close Button */}
           <button
             onClick={() => setIsSidebarOpen(false)}
-            className="absolute -top-3 -right-3 bg-white text-red-400 rounded-full p-1 shadow-md scale-0 group-hover:scale-100 transition-transform hover:bg-red-50"
+            className="absolute -top-3 -right-3 bg-white text-red-400 rounded-full p-1 shadow-md scale-0 group-hover:scale-100 transition-transform hover:bg-red-50 "
           >
             <IoClose size={20} />
           </button>

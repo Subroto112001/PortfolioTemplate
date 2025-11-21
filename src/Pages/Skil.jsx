@@ -22,8 +22,8 @@ const Skil = () => {
 
   return (
     <div className="relative w-full h-screen z-10">
-      <div className="py-10 px-2 sm:px-50 ">
-        <div className="">
+      <div className="py-10 px-2 sm:px-20 md:px-50 ">
+        <div className="flex flex-col ">
           <div className="text-3xl flex items-end  ">
             <span className="p-2 bg-[#FDC435]">Skills</span>
             <div className="w-2/4 h-[3px] bg-[#FDC435]"></div>
@@ -56,46 +56,44 @@ const Skil = () => {
             </div>
           </div>
           {/* --- REVISED IMAGE SECTION END --- */}
-
-          {/* Added relative z-20 to ensure skills appear ABOVE the orbit animation on mobile */}
-          <div className="mt-2 sm:mt-10 flex flex-col gap-3 sm:gap-15 relative z-20">
-            {/* Front-End Section */}
-            {/* Changed w-[65%] to w-full lg:w-[65%] for responsiveness */}
-            <div className="flex flex-col items-center mt-2 gap-3 sm:gap-6 bg-[#e6e6fce5] p-2 sm:p-5 rounded-lg shadow-lg h-auto w-full lg:w-[65%]">
-              <h3 className="text-2xl">Front-End Skill</h3>
-              {/* Added flex-wrap and justify-center/start for mobile responsiveness */}
-              <div className="flex flex-wrap justify-center sm:justify-start gap-4 sm:gap-6">
-                {FrontEnd.map((item) => (
-                  <div
-                    className="flex w-18 sm:w-[90px] flex-col justify-start items-center gap-5 hover:scale-105 transition-all duration-500"
-                    key={item.id}
-                  >
-                    <span className="text-3xl sm:text-4xl p-3 bg-[#EF52FF] text-white w-[60px] sm:w-[70px] flex justify-center items-center rounded-md shadow-xl">
-                      {item.icon}
-                    </span>
-                    <p className="text-sm sm:text-base">{item.name}</p>
-                  </div>
-                ))}
+          <div className="flex justify-center items-center h-full w-full">
+            <div className="mt-2 sm:mt-10 flex flex-col justify-center items-center gap-3 sm:gap-8 relative z-20">
+              <div className="flex flex-col items-center gap-3 md:gap-6 bg-[#e6e6fce5] p-2 sm:p-4 rounded-lg shadow-lg h-auto w-[90%] sm:w-full md:w-full lg:w-full">
+                <h3 className="text-2xl">Front-End Skill</h3>
+                {/* Added flex-wrap and justify-center/start for mobile responsiveness */}
+                <div className="flex flex-wrap justify-center sm:justify-center gap-4 md:gap-6">
+                  {FrontEnd.map((item) => (
+                    <div
+                      className="flex w-18 sm:w-[90px] flex-col justify-start items-center gap-5 hover:scale-105 transition-all duration-500"
+                      key={item.id}
+                    >
+                      <span className="text-3xl sm:text-4xl p-3 bg-[#EF52FF] text-white w-[60px] sm:w-[70px] flex justify-center items-center rounded-md shadow-xl">
+                        {item.icon}
+                      </span>
+                      <p className="text-sm sm:text-base">{item.name}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            {/* Back-End Section */}
-            {/* Changed w-[65%] to w-full lg:w-[65%] for responsiveness */}
-            <div className="flex flex-col items-center mt-2 gap-3 sm:gap-6 bg-[#e6e6fce5] p-2 sm:p-5 rounded-lg shadow-lg h-auto w-full lg:w-[65%]">
-              <h3 className="text-2xl">Back-End Skill</h3>
-              {/* Added flex-wrap and justify-center/start for mobile responsiveness */}
-              <div className="flex flex-wrap justify-center sm:justify-start gap-4 sm:gap-6">
-                {BackEnd.map((item) => (
-                  <div
-                    className="flex w-18 sm:w-[90px] flex-col justify-start items-center gap-5 hover:scale-105 transition-all duration-500"
-                    key={item.id}
-                  >
-                    <span className="text-3xl sm:text-4xl p-3 bg-[#EF52FF] text-white w-[60px] sm:w-[70px] flex justify-center items-center rounded-md shadow-xl">
-                      {item.icon}
-                    </span>
-                    <p className="text-sm sm:text-base">{item.name}</p>
-                  </div>
-                ))}
+              {/* Back-End Section */}
+
+              <div className="flex flex-col items-center gap-3 md:gap-6 bg-[#e6e6fce5] p-2 sm:p-4 rounded-lg shadow-lg h-auto w-[90%] sm:w-full md:w-full lg:w-full">
+                <h3 className="text-2xl">Back-End Skill</h3>
+                {/* Added flex-wrap and justify-center/start for mobile responsiveness */}
+                <div className="flex flex-wrap justify-center sm:justify-center gap-4 md:gap-6">
+                  {BackEnd.map((item) => (
+                    <div
+                      className="flex w-18 sm:w-[90px] flex-col justify-start items-center gap-5 hover:scale-105 transition-all duration-500"
+                      key={item.id}
+                    >
+                      <span className="text-3xl sm:text-4xl p-3 bg-[#EF52FF] text-white w-[60px] sm:w-[70px] flex justify-center items-center rounded-md shadow-xl">
+                        {item.icon}
+                      </span>
+                      <p className="text-sm sm:text-base">{item.name}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

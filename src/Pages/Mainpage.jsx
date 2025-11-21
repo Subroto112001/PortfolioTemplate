@@ -1,17 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom"; // <-- ADD useNavigate
-import { useSwipeable } from "react-swipeable"; // <-- ADD useSwipeable
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useSwipeable } from "react-swipeable";
 import Slidebar from "../Component/MainPgae/Slidebar";
 import { slideBarIcon } from "../Helper/Icon";
 import { CgShapeHalfCircle } from "react-icons/cg";
 import { IoClose } from "react-icons/io5";
+import { FaChevronLeft } from "react-icons/fa";
 
 const Mainpage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false); // State to track mobile view
+  const [isMobile, setIsMobile] = useState(false);
 
   const location = useLocation();
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
   const sidebarRef = useRef(null);
   const toggleRef = useRef(null);
@@ -20,19 +21,15 @@ const Mainpage = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  // --- 📱 Responsive Check (Set isMobile) 📱 ---
   useEffect(() => {
-    // Check screen width against Tailwind's default 'sm' breakpoint (640px)
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 640);
+      setIsMobile(window.innerWidth < 768);
     };
 
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
-
-  // --- 🚀 Swipe Navigation Logic 🚀 ---
 
   const currentPathIndex = slideBarIcon.findIndex(
     (item) => item.path === location.pathname
@@ -55,38 +52,26 @@ const Mainpage = () => {
     return slideBarIcon[currentPathIndex - 1].path;
   };
 
-  // Define swipe configuration
   const swipeConfig = {
-    // Swiped Left (Go to next page)
     onSwipedLeft: () => {
       const nextPath = getNextPath();
       if (nextPath) navigate(nextPath);
     },
-    // Swiped Right (Go to previous page or close sidebar)
     onSwipedRight: () => {
       if (isSidebarOpen) {
-        // If sidebar is open, swipe right closes it
         setIsSidebarOpen(false);
       } else {
-        // If sidebar is closed, swipe right navigates back
         const prevPath = getPrevPath();
         if (prevPath) navigate(prevPath);
       }
     },
-    // Prevents accidental scrolling when trying to swipe horizontally
     preventDefaultTouchmoveEvent: true,
-    // Disabling mouse tracking since this is explicitly for touch/mobile
     trackMouse: false,
     delta: 50,
   };
 
-  // Conditionally apply swipe handlers:
-  // If isMobile is true, use the swipeConfig. Otherwise, use an empty object {}
   const handlers = useSwipeable(isMobile ? swipeConfig : {});
 
-  // --- Standard Side Effects ---
-
-  // Click Outside Logic (Existing)
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!isSidebarOpen) return;
@@ -103,50 +88,68 @@ const Mainpage = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isSidebarOpen]);
 
-  // Close sidebar on route change
   useEffect(() => {
     setIsSidebarOpen(false);
   }, [location.pathname]);
 
   return (
-    // Apply swipe handlers {...handlers} to the main container
     <div
       {...handlers}
       className="h-screen bg-[#e6e6fce5] relative overflow-hidden font-sans"
     >
-      <div className="flex justify-between h-full">
-        {/* Main Content */}
-        <div className="w-full sm:w-[93%] h-full scrollbar-hide">
+      <style>{`
+        @keyframes slideAndFade {
+          0% {
+            transform: translateX(0) translateY(-50%);
+            opacity: 1;
+          }
+          50% {
+            transform: translateX(-25px) translateY(-50%);
+            opacity: 0.3;
+          }
+          100% {
+            transform: translateX(0) translateY(-50%);
+            opacity: 1;
+          }
+        }
+        .slide-fade-animation {
+          animation: slideAndFade 2s ease-in-out infinite;
+        }
+      `}</style>
+
+      <div className="flex justify-between h-full ">
+        <div className="w-full md:w-[93%] h-full scrollbar-hide">
           <Outlet />
         </div>
 
-        {/* Desktop Sidebar */}
-        <div className="hidden sm:block sm:w-[7%] fixed right-0 top-0 h-screen z-10 ">
+        <div className="hidden md:block md:w-[7%] fixed right-8  lg:right-5 top-0 h-screen z-10 ">
           <Slidebar />
         </div>
       </div>
 
+      {/* Mobile Sidebar Toggle Button */}
       <div
-        className={`absolute top-1/2 -translate-y-1/2 right-[-10px] hover:right-0 z-30 flex sm:hidden transition-all duration-300 
+        className={`absolute top-1/2 right-[-10px] hover:right-0 z-30 flex md:hidden transition-all duration-300 
     ${
-      isSidebarOpen ? "translate-x-full opacity-0" : "translate-x-0 opacity-100"
-    } 
-    animate-[wiggle_1s_ease-in-out_infinite]
+      isSidebarOpen
+        ? "translate-x-full opacity-0"
+        : "translate-x-0 opacity-100 slide-fade-animation"
+    }
   `}
       >
         <button
           ref={toggleRef}
           onClick={handleSlidebarOpen}
-          // Updated to #FDC435
-          className="bg-[#FDC435] text-white pr-3 pt-3 pb-3 rounded-l-2xl shadow-lg shadow-orange-500/20 transition-all duration-300 group border border-r-0 border-white/40"
+          className="bg-[#FDC435] text-white pr-3 pt-3 pb-3 rounded-full shadow-lg shadow-orange-500/20 transition-all duration-300 group border border-r-0 border-white/40 hover:animate-none"
         >
-          <CgShapeHalfCircle className="text-3xl animate-pulse group-hover:animate-none group-hover:scale-110 transition-transform" />
+          <FaChevronLeft className="text-3xl group-hover:scale-110 transition-transform" />
         </button>
       </div>
 
+      {/* Mobile Sidebar */}
       <div
         ref={sidebarRef}
-        className={`absolute right-4 top-1/2 -translate-y-1/2 sm:hidden z-40
+        className={`absolute right-4 top-1/2 -translate-y-1/2 md:hidden z-40 
         transition-all duration-500 cubic-bezier(0.34, 1.56, 0.64, 1) origin-right
         ${
           isSidebarOpen
@@ -155,7 +158,6 @@ const Mainpage = () => {
         }`}
       >
         <div className="relative flex flex-col gap-5 justify-center items-center bg-white/80 backdrop-blur-xl p-4 rounded-2xl shadow-2xl border border-white/60">
-          {/* Close Button */}
           <button
             onClick={() => setIsSidebarOpen(false)}
             className="absolute -top-3 -right-3 bg-white text-red-400 rounded-full p-1 shadow-md scale-0 group-hover:scale-100 transition-transform hover:bg-red-50 "
@@ -173,7 +175,6 @@ const Mainpage = () => {
                 onClick={() => setIsSidebarOpen(false)}
                 className="relative group"
               >
-                {/* Active Indicator Dot */}
                 {isActive && (
                   <span className="absolute -left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-[#FDC435] rounded-full" />
                 )}
@@ -183,8 +184,8 @@ const Mainpage = () => {
                     p-3 text-2xl rounded-xl transition-all duration-300 flex items-center justify-center
                     ${
                       isActive
-                        ? "bg-[#FDC435] text-white shadow-lg shadow-[#FDC435]/40 scale-110" // Active Yellow
-                        : "bg-white text-gray-400 hover:bg-[#FDC435] hover:text-white hover:shadow-md hover:scale-105" // Inactive -> Hover Yellow
+                        ? "bg-[#FDC435] text-white shadow-lg shadow-[#FDC435]/40 scale-110"
+                        : "bg-white text-gray-400 hover:bg-[#FDC435] hover:text-white hover:shadow-md hover:scale-105"
                     }
                   `}
                 >
@@ -198,7 +199,7 @@ const Mainpage = () => {
 
       {/* Dark Overlay Backdrop */}
       <div
-        className={`absolute inset-0 bg-black/10 backdrop-blur-[2px] z-20 transition-opacity duration-300 sm:hidden ${
+        className={`absolute inset-0 bg-black/10 backdrop-blur-[2px] z-20 transition-opacity duration-300 md:hidden ${
           isSidebarOpen
             ? "opacity-100 visible"
             : "opacity-0 invisible pointer-events-none"

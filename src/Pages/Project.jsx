@@ -33,9 +33,8 @@ const Project = () => {
 
         <div className="mt-10 flex gap-3 flex-row z-20">
           {/* Height Container */}
-          <div className="w-full h-[80vh]">
+          <div className="w-full md:w-2/3 h-[80vh]">
             <Virtuoso
-              // --- HIDE SCROLLBAR CLASSES ADDED BELOW ---
               className="[&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
               style={{ height: "100%", width: "100%" }}
               totalCount={50}
@@ -53,7 +52,7 @@ const Project = () => {
                     <h3 className=" text-lg sm:text-3xl truncate font-bold">
                       E-commerce Website {index + 1}
                     </h3>
-                    <p className="text-md sm:text-2xl  sm:w-[500px]  truncate text-gray-700">
+                    <p className="text-md sm:text-2xl  sm:w-[400px]  truncate text-gray-700">
                       Discover Brand Name, your ultimate online destination.
                     </p>
                   </div>

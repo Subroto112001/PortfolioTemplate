@@ -6,13 +6,12 @@ const Home = () => {
   return (
     <div className="px-2 sm:pl-4 w-full relative z-10">
       <div className="flex flex-col justify-center items-center pb-20 sm:pb-0">
-        {/* Main Content Flex Container */}
+     
         <div className="flex flex-col sm:flex-row justify-between sm:gap-20 items-center mt-5 w-full">
-          {/* --- IMAGE AND ANIMATION SECTION START --- */}
-          {/* Removed padding (sm:pl-20 pt-10) here to ensure true centering relative to the image container */}
-          <div className="relative group flex justify-center items-center mt-10 sm:mt-0">
-            {/* 1. The Profile Image Container */}
-            <div className="w-[140px] sm:w-[300px] h-[140px] sm:h-[300px] rounded-full border-4 border-white shadow-2xl relative z-20 overflow-hidden">
+       
+          <div className="relative group flex justify-center items-center ml-0 sm:ml-30  mt-10 sm:-mt-20">
+       
+            <div className="w-[140px] sm:w-[300px] h-[140px] sm:h-[300px]   rounded-full border-4 border-white shadow-2xl relative z-20 overflow-hidden">
               <picture>
                 <img
                   src={HeroImage.Author}
@@ -52,11 +51,11 @@ const Home = () => {
           {/* --- IMAGE SECTION END --- */}
 
           {/* --- TEXT SECTION --- */}
-          <div className="flex flex-col justify-end items-center sm:items-end sm:text-right mt-16 sm:mt-0">
-            <h1 className="text-xl sm:text-6xl font-bold mb-4 text-center sm:text-end">
+          <div className="flex flex-col  justify-end items-center sm:items-end sm:text-right mt-16 sm:mt-30 w-full sm:w-1/2 z-20">
+            <h1 className="text-3xl sm:text-6xl font-bold mb-4 text-center sm:text-end">
               Hi, I'm Ranocoder
             </h1>
-            <h2 className="text-lg sm:text-4xl font-semibold mb-6 text-center sm:text-end">
+            <h2 className="text-xl sm:text-4xl font-semibold mb-6 text-center sm:text-end">
               Full Stack Developer
             </h2>
 
@@ -80,7 +79,7 @@ const Home = () => {
               ))}
             </div>
 
-            <p className="mt-6 sm:mt-10 text-center text-[12px] sm:text-[14px] sm:text-end text-gray-900">
+            <p className="mt-6 sm:mt-10 text-center text-[12px] sm:text-[20px] sm:text-end text-gray-900">
               As a full-stack developer, I specialize in both front-end and
               <br className="hidden sm:block" />
               back-end technologies. I work with frameworks like React, Node.js,

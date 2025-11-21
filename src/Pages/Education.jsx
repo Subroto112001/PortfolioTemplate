@@ -32,9 +32,9 @@ const Education = () => {
     },
   ];
   return (
-    <div className="py-10 px-4 sm:px-10 relative group z-10">
+    <div className="py-10 px-2 sm:px-50 relative group z-10">
       <div className="text-3xl flex items-end z-20">
-        <span className="p-2 bg-[#FDC435] text-xl sm:text-3xl">Education</span>
+        <span className="p-2 bg-[#FDC435]">Education</span>
         <div className="w-2/4 sm:w-1/2 h-[3px] bg-[#FDC435]"></div>
       </div>
 

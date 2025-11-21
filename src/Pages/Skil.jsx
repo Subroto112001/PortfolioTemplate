@@ -21,14 +21,10 @@ const Skil = () => {
   ];
 
   return (
-    // FIX: Changed 'overflow-x-hidden' to 'overflow-hidden'
-    // This clips any elements (like the bottom vector) that extend outside the container, removing unwanted scrollbars.
-    <div className="relative z-10 min-h-screen overflow-hidden">
-
-      {/* Adjusted padding: px-4 for mobile, larger padding for tablet/desktop */}
-      <div className="py-2 px-4 md:px-10 lg:px-20 xl:px-40">
-        <div className=" ">
-          <div className="text-3xl flex items-end mt-5 sm:mt-0">
+    <div className="relative w-full h-screen z-10">
+      <div className="py-10 px-2 sm:px-50 ">
+        <div className="">
+          <div className="text-3xl flex items-end  ">
             <span className="p-2 bg-[#FDC435]">Skills</span>
             <div className="w-2/4 h-[3px] bg-[#FDC435]"></div>
           </div>
@@ -62,7 +58,7 @@ const Skil = () => {
           {/* --- REVISED IMAGE SECTION END --- */}
 
           {/* Added relative z-20 to ensure skills appear ABOVE the orbit animation on mobile */}
-          <div className="mt-2 sm:mt-10 flex flex-col gap-3 sm:gap-10 relative z-20">
+          <div className="mt-2 sm:mt-10 flex flex-col gap-3 sm:gap-15 relative z-20">
             {/* Front-End Section */}
             {/* Changed w-[65%] to w-full lg:w-[65%] for responsiveness */}
             <div className="flex flex-col items-center mt-2 gap-3 sm:gap-6 bg-[#e6e6fce5] p-2 sm:p-5 rounded-lg shadow-lg h-auto w-full lg:w-[65%]">

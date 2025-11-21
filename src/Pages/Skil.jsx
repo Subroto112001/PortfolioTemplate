@@ -57,7 +57,7 @@ const Skil = () => {
           </div>
           {/* --- REVISED IMAGE SECTION END --- */}
           <div className="flex justify-center items-center h-full w-full">
-            <div className="mt-2 sm:mt-10 flex flex-col justify-center items-center gap-3 sm:gap-8 relative z-20">
+            <div className="mt-10 md:mt-30 flex flex-col justify-center items-center gap-3 sm:gap-8 relative z-20">
               <div className="flex flex-col items-center gap-3 md:gap-6 bg-[#e6e6fce5] p-2 sm:p-4 rounded-lg shadow-lg h-auto w-[90%] sm:w-full md:w-full lg:w-full">
                 <h3 className="text-2xl">Front-End Skill</h3>
                 {/* Added flex-wrap and justify-center/start for mobile responsiveness */}

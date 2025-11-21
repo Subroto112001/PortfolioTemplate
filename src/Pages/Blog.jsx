@@ -8,15 +8,14 @@ const Blog = () => {
   // just like the Project component does with totalCount.
 
   return (
-    <div className="relative w-full z-10">
+    <div className="relative w-full h-screen z-10">
       <div className="py-10 px-2 sm:px-50 ">
         {/* --- HEADER SECTION --- */}
-      
-          <div className="text-3xl flex items-end">
-            <span className="p-2 bg-[#FDC435]">My Blog</span>
-            <div className="w-2/4 h-[3px] bg-[#FDC435]"></div>
-          </div>
-    
+
+        <div className="text-3xl flex items-end">
+          <span className="p-2 bg-[#FDC435]">My Blog</span>
+          <div className="w-2/4 h-[3px] bg-[#FDC435]"></div>
+        </div>
 
         {/* --- BACKGROUND ANIMATION (Copied from Project/Skil) --- */}
         <div className="absolute top-30 -right-50 w-full -z-5">

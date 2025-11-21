@@ -7,9 +7,7 @@ const Home = () => {
     <div className="px-2 sm:pl-4 w-full relative z-10">
       <div className="flex flex-col justify-center items-center pb-20 sm:pb-0">
         <div className="flex flex-col sm:flex-row justify-between sm:gap-20 items-center mt-5 w-full">
-          {/* --- IMAGE SECTION START --- */}
-          <div className="relative group pl-10 sm:pl-20 pt-10 sm:pt-0">
-            {/* 1. The Main Image */}
+          <div className="relative group sm:pl-20 pt-10 sm:pt-0">
             <div className="w-[140px] sm:w-[300px] h-[140px] sm:h-[300px] rounded-full border-4 border-white shadow-2xl relative z-20 overflow-hidden">
               <picture>
                 <img

@@ -23,11 +23,12 @@ const Skil = () => {
   return (
     // FIX: Changed 'overflow-x-hidden' to 'overflow-hidden'
     // This clips any elements (like the bottom vector) that extend outside the container, removing unwanted scrollbars.
-    <div className="relative z-10 overflow-hidden">
+    <div className="relative z-10 min-h-screen overflow-hidden">
+
       {/* Adjusted padding: px-4 for mobile, larger padding for tablet/desktop */}
-      <div className="py-10 px-4 md:px-10 lg:px-20 xl:px-40">
+      <div className="py-2 px-4 md:px-10 lg:px-20 xl:px-40">
         <div className=" ">
-          <div className="text-3xl flex items-end mt-10 sm:mt-0">
+          <div className="text-3xl flex items-end mt-5 sm:mt-0">
             <span className="p-2 bg-[#FDC435]">Skills</span>
             <div className="w-2/4 h-[3px] bg-[#FDC435]"></div>
           </div>

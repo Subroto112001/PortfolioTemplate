@@ -42,21 +42,18 @@ const Project = () => {
               overscan={200}
               itemContent={(index) => (
                 <div className="mb-10 flex items-center gap-10 bg-[#e6e6fce5] p-5 rounded-lg shadow-lg mx-2">
-                  <picture>
+                  <picture className="w-1/2">
                     <img
-                      src={
-                        ProjectImage?.Project1 ||
-                        "https://via.placeholder.com/200x100"
-                      }
+                      src={ProjectImage?.Project1}
                       alt=""
                       className="w-[200px] h-[100px] object-cover rounded-md"
                     />
                   </picture>
-                  <div className="flex flex-col gap-3">
-                    <h3 className="text-3xl flex gap-2 items-center font-bold">
+                  <div className="w-1/2 flex flex-col gap-3">
+                    <h3 className=" text-lg sm:text-3xl truncate font-bold">
                       E-commerce Website {index + 1}
                     </h3>
-                    <p className="text-2xl w-full sm:w-[500px]  truncate text-gray-700">
+                    <p className="text-md sm:text-2xl  sm:w-[500px]  truncate text-gray-700">
                       Discover Brand Name, your ultimate online destination.
                     </p>
                   </div>

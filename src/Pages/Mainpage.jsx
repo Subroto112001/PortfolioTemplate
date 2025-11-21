@@ -4,16 +4,10 @@ import Slidebar from "../Component/MainPgae/Slidebar";
 import { slideBarIcon } from "../Helper/Icon";
 import { CgShapeHalfCircle } from "react-icons/cg";
 import { IoClose } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
 
 const Mainpage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
-
-  const MIN_SWIPE = 70; // minimum distance to trigger swipe
 
   const sidebarRef = useRef(null);
   const toggleRef = useRef(null);
@@ -38,42 +32,9 @@ const Mainpage = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isSidebarOpen]);
-  // Only run on mobile
-  const isMobile = window.innerWidth < 768;
-
-  const handleTouchStart = (e) => {
-    if (!isMobile || isSidebarOpen) return; // skip if desktop or sidebar open
-    touchStartX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e) => {
-    if (!isMobile || isSidebarOpen) return;
-    touchEndX.current = e.changedTouches[0].clientX;
-
-    const distance = touchEndX.current - touchStartX.current;
-
-    if (Math.abs(distance) < MIN_SWIPE) return; // ignore small swipes
-
-    const currentPath = location.pathname;
-    const currentIndex = pages.indexOf(currentPath);
-
-    // SWIPE LEFT → GO TO NEXT
-    if (distance < 0 && currentIndex < pages.length - 1) {
-      navigate(pages[currentIndex + 1]);
-    }
-
-    // SWIPE RIGHT → GO TO PREVIOUS
-    if (distance > 0 && currentIndex > 0) {
-      navigate(pages[currentIndex - 1]);
-    }
-  };
 
   return (
-    <div
-      className="h-screen bg-[#e6e6fce5] relative overflow-hidden font-sans"
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-    >
+    <div className="h-screen bg-[#e6e6fce5] relative overflow-hidden font-sans">
       <div className="flex justify-between h-full">
         {/* Main Content */}
         <div className="w-full sm:w-[93%] h-full  scrollbar-hide">

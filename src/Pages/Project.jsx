@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Virtuoso } from "react-virtuoso";
+import { IoClose } from "react-icons/io5";
+
 import { ProjectImage, SkillImage } from "../Helper/Image";
+import { ProjectIcon } from "../Helper/Icon";
+import { ProjectInfo } from "../Helper/Info";
 
 const Project = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  const handleProjectClick = (index, item) => {
+    setSelectedProject(item);
+  };
+
+  const closeModal = () => {
+    setSelectedProject(null);
+  };
+
   return (
     <div className="relative z-10">
-      <div className="py-10 px-2 sm:px-50 ">
-        <div className=" ">
+      <div className="py-10 px-2 sm:px-50">
+        <div>
           <div className="text-3xl flex items-end">
             <span className="p-2 bg-[#FDC435]">Project</span>
             <div className="w-2/4 h-[3px] bg-[#FDC435]"></div>
@@ -35,25 +49,28 @@ const Project = () => {
           {/* Height Container */}
           <div className="w-full md:w-2/3 h-[80vh]">
             <Virtuoso
+              data={ProjectInfo}
               className="[&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
               style={{ height: "100%", width: "100%" }}
-              totalCount={50}
               overscan={200}
-              itemContent={(index) => (
-                <div className="mb-10 flex items-center gap-10 bg-[#e6e6fce5] p-5 rounded-lg shadow-lg mx-2">
+              itemContent={(index, item) => (
+                <div
+                  onClick={() => handleProjectClick(index, item)}
+                  className="mb-10 flex items-center gap-10 bg-[#e6e6fce5] p-5 rounded-lg shadow-lg mx-2 cursor-pointer transition-all hover:shadow-xl hover:scale-[1.02] hover:bg-[#d6d6fce5]"
+                >
                   <picture className="w-1/2 sm:w-[250px]">
                     <img
-                      src={ProjectImage?.Project1}
+                      src={item?.image}
                       alt=""
                       className="w-[200px] h-[100px] object-cover rounded-md"
                     />
                   </picture>
                   <div className="w-1/2 flex flex-col gap-3">
-                    <h3 className=" text-lg sm:text-3xl truncate font-bold">
-                      E-commerce Website {index + 1}
+                    <h3 className="text-lg sm:text-3xl truncate font-bold">
+                      {item?.title}
                     </h3>
-                    <p className="text-md sm:text-2xl  sm:w-[400px]  truncate text-gray-700">
-                      Discover Brand Name, your ultimate online destination.
+                    <p className="text-md sm:text-2xl sm:w-[400px] truncate text-gray-700">
+                      {item?.description}
                     </p>
                   </div>
                 </div>
@@ -62,11 +79,97 @@ const Project = () => {
           </div>
         </div>
       </div>
-      <div className="absolute -bottom-13 -right-30 opacity-100 -z-10  w-[300px] sm:w-[600px]">
+
+      <div className="absolute -bottom-13 -right-30 opacity-100 -z-10 w-[300px] sm:w-[600px]">
         <picture>
           <img src={SkillImage.Vector4} alt="vector" />
         </picture>
       </div>
+
+      {/* Modal */}
+      {selectedProject && (
+        <div
+          className="fixed inset-0 bg-[#0000008f] bg-opacity-60 flex items-center justify-center z-50 p-4"
+          onClick={closeModal}
+        >
+          <div
+            className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center rounded-t-xl">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
+                {selectedProject.title}
+              </h2>
+              <button
+                onClick={closeModal}
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              >
+                <span className="text-xl">{ProjectIcon.iclose}</span>
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6">
+              {/* Project Image */}
+              <div className="mb-6">
+                <img
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  className="w-full h-[300px] sm:h-[400px] object-cover rounded-lg shadow-md"
+                />
+              </div>
+
+              {/* Project Description */}
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold mb-3 text-gray-800">{}</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  {selectedProject.description}
+                </p>
+              </div>
+
+              {/* Technologies Used */}
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold mb-3 text-gray-800">
+                  Technologies Used
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {selectedProject.technologies.map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className="px-4 py-2 bg-[#FDC435] text-gray-800 rounded-full text-sm font-medium"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-4 flex-wrap">
+                <a
+                  href={selectedProject.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 bg-[#EF52FF] text-white rounded-lg font-medium hover:bg-[#FDC435] transition-colors flex items-center gap-2"
+                >
+                  <span className="text-xl">{ProjectIcon.github}</span>
+                  View on GitHub
+                </a>
+                <a
+                  href={selectedProject.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 bg-[#EF52FF] text-white rounded-lg font-medium hover:bg-[#FDC435] transition-colors flex items-center gap-2"
+                >
+                  <span className="text-xl">{ProjectIcon.live}</span>
+                  Live Demo
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

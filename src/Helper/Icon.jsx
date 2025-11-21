@@ -1,4 +1,5 @@
 import {
+  FaExternalLinkAlt,
   FaFacebook,
   FaFileCode,
   FaGithub,
@@ -8,6 +9,7 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import { IoMdReturnLeft, IoMdReturnRight } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 import { LuBrain } from "react-icons/lu";
 import { PiStudentFill, PiToolbox } from "react-icons/pi";
 import { RiHome5Line } from "react-icons/ri";
@@ -40,11 +42,7 @@ export const slideBarIcon = [
   },
 ];
 
-export const returnIcon = {
-  hash: <FaHashtag />,
-  left: <IoMdReturnLeft />,
-  right: <IoMdReturnRight />,
-};
+
 
 export const socialIcon = [
   {
@@ -72,3 +70,9 @@ export const socialIcon = [
     url: "https://facebook.com/",
   },
 ];
+
+export const ProjectIcon = {
+  github: <FaGithub />,
+  live: <FaExternalLinkAlt />,
+  iclose: <IoClose />,
+};

@@ -3,22 +3,10 @@ import { FaCss3Alt, FaHtml5, FaReact } from "react-icons/fa";
 import { IoLogoJavascript } from "react-icons/io";
 import { RiTailwindCssFill } from "react-icons/ri";
 import { SkillImage } from "../Helper/Image";
+import { BackEnd, FrontEnd } from "../Helper/Info";
 
 const Skil = () => {
-  const FrontEnd = [
-    { id: 1, name: "HTML", icon: <FaHtml5 /> },
-    { id: 2, name: "CSS", icon: <FaCss3Alt /> },
-    { id: 3, name: "JavaScript", icon: <IoLogoJavascript /> },
-    { id: 4, name: "TailwindCSS", icon: <RiTailwindCssFill /> },
-    { id: 5, name: "React", icon: <FaReact /> },
-  ];
-  const BackEnd = [
-    { id: 1, name: "HTML", icon: <FaHtml5 /> },
-    { id: 2, name: "CSS", icon: <FaCss3Alt /> },
-    { id: 3, name: "JavaScript", icon: <IoLogoJavascript /> },
-    { id: 4, name: "TailwindCSS", icon: <RiTailwindCssFill /> },
-    { id: 5, name: "React", icon: <FaReact /> },
-  ];
+ 
 
   return (
     <div className="relative w-full h-screen z-10">

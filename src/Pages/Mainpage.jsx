@@ -131,13 +131,13 @@ const Mainpage = () => {
 
         {/* 2. Updated Info Icon with onClick Event */}
         <div
-          className="absolute bottom-[3%] left-[3%] z-20 cursor-pointer group"
+          className="absolute top-[3%] right-[3%] z-20 cursor-pointer group"
           onClick={() => setIsDevModalOpen(true)}
         >
           <span className="text-3xl text-gray-600 group-hover:text-[#FDC435] transition-colors duration-300">
             <FaCircleInfo />
           </span>
-          {/* Optional Tooltip */}
+         
           <span className="absolute left-10 top-1/2 -translate-y-1/2 bg-white px-2 py-1 rounded text-xs shadow-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
             About Developer
           </span>

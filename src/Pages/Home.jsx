@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async"; // SEO Import
 import { HeroImage } from "../Helper/Image";
 import { socialIcon } from "../Helper/Icon";
 import { AuthorInfo } from "../Helper/Info";
@@ -6,6 +7,15 @@ import { AuthorInfo } from "../Helper/Info";
 const Home = () => {
   return (
     <div className="px-2 md:pl-4 w-full relative z-10">
+      {/* SEO Meta Tags */}
+      <Helmet>
+        <title>Home | {AuthorInfo.name}</title>
+        <meta
+          name="description"
+          content={`Welcome to the portfolio of ${AuthorInfo.name}, a ${AuthorInfo.role}.`}
+        />
+      </Helmet>
+
       <div className="flex flex-col justify-center items-center pb-20 md:pb-0 ">
         <div className="flex flex-col md:flex-row justify-between md:gap-20 items-center mt-5 w-full">
           <div className="relative group flex justify-center items-center ml-0 lg:ml-[10%] xl:ml-[20%] mt-10 md:mt-20">
@@ -13,36 +23,26 @@ const Home = () => {
               <picture>
                 <img
                   src={AuthorInfo.image}
-                  alt="Author Image"
+                  alt={`${AuthorInfo.name} - ${AuthorInfo.role}`} // Fixed Alt Tag for SEO
                   className="w-full h-full rounded-full object-cover hover:scale-110 transition-transform duration-500"
                 />
               </picture>
             </div>
 
-            {/* --- ANIMATIONS (Centered relative to the parent div) --- */}
-
+            {/* --- ANIMATIONS --- */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full border-2 border-dashed border-purple-400/50 animate-[spin_10s_linear_infinite] z-0"></div>
-
-            {/* 3. Reverse Rotating Ring (Inner) */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] rounded-full border border-cyan-400/40 animate-[spin_15s_linear_infinite_reverse] z-0"></div>
-
-            {/* 4. Orbiting Planet/Dot */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] animate-[spin_8s_linear_infinite] z-10 pointer-events-none">
               <div className="w-4 h-4 bg-[#ffffff] rounded-full shadow-[0_0_10px_#FDC435] absolute top-0 left-1/2 -translate-x-1/2"></div>
             </div>
-
-            {/* 5. Floating Tech Symbols (Adjusted positions slightly for better placement) */}
             <span className="absolute top-0 -right-5 md:-right-5 text-2xl md:text-3xl font-bold text-[#EF52FF] animate-bounce z-30 delay-75">
               {`</>`}
             </span>
             <span className="absolute bottom-0 left-0 md:-left-5 text-2xl font-bold text-cyan-400 animate-[bounce_3s_infinite] z-30">
               {`{ }`}
             </span>
-
-            {/* 6. Static Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-[#EF52FF] blur-[80px] opacity-40 -z-10"></div>
           </div>
-          {/* --- IMAGE SECTION END --- */}
 
           {/* --- TEXT SECTION --- */}
           <div className="flex flex-col mr-0 md:mr-10 justify-end items-center md:items-end md:text-right mt-16 md:mt-30 w-full md:w-1/2 z-20">
@@ -80,10 +80,9 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Different part of Owner */}
       <div className="absolute top-0 left-0 right-0 opacity-100 -z-10">
         <picture>
-          <img src={HeroImage.BgVector} alt="" />
+          <img src={HeroImage.BgVector} alt="Background Vector Art" />
         </picture>
       </div>
     </div>

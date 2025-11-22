@@ -1,26 +1,28 @@
 import React from "react";
 import Home from "./Pages/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async"; // New Import
 import Mainpage from "./Pages/Mainpage";
 import Skil from "./Pages/Skil";
 import Education from "./Pages/Education";
 import Project from "./Pages/Project";
 import Blog from "./Pages/Blog";
 
-
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Mainpage />}>
-          <Route index element={<Home />} />
-          <Route path="/skill" element={<Skil />} />
-          <Route path="/education" element={<Education />} />
-          <Route path="/project" element={<Project />} />
-          <Route path="/blog" element={<Blog />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Mainpage />}>
+            <Route index element={<Home />} />
+            <Route path="/skill" element={<Skil />} />
+            <Route path="/education" element={<Education />} />
+            <Route path="/project" element={<Project />} />
+            <Route path="/blog" element={<Blog />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 };
 

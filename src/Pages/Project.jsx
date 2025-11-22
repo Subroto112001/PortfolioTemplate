@@ -1,13 +1,12 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet-async"; // SEO Import
 import { Virtuoso } from "react-virtuoso";
 import { IoClose } from "react-icons/io5";
-
 import { ProjectImage, SkillImage } from "../Helper/Image";
 import { ProjectIcon } from "../Helper/Icon";
-import {  ProjectInfo } from "../Helper/Info";
+import { ProjectInfo } from "../Helper/Info";
 
 const Project = () => {
-  
   const [selectedProject, setSelectedProject] = useState(null);
 
   const handleProjectClick = (index, item) => {
@@ -20,6 +19,15 @@ const Project = () => {
 
   return (
     <div className="relative z-10">
+      {/* SEO Meta Tags */}
+      <Helmet>
+        <title>Projects | Ranocoder</title>
+        <meta
+          name="description"
+          content="Showcase of my recent web development projects and case studies."
+        />
+      </Helmet>
+
       <div className="py-10 px-2 sm:px-50">
         <div>
           <div className="text-3xl flex items-end">
@@ -28,7 +36,7 @@ const Project = () => {
           </div>
         </div>
 
-        {/* --- BACKGROUND ANIMATION --- */}
+        {/* Animation Part */}
         <div className="absolute top-30 -right-50 w-full -z-5">
           <div className="relative group mx-auto my-10 w-full max-w-[400px] aspect-square">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full border-2 border-dashed border-purple-400/50 animate-[spin_20s_linear_infinite] z-0"></div>
@@ -36,18 +44,13 @@ const Project = () => {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] animate-[spin_15s_linear_infinite] z-10 pointer-events-none">
               <div className="w-4 h-4 bg-[#ffffff] rounded-full shadow-[0_0_15px_#FDC435] absolute top-0 left-1/2 -translate-x-1/2"></div>
             </div>
-            <span className="absolute top-10 right-0 text-3xl font-bold text-[#EF52FF] animate-[float_3s_ease-in-out_infinite_alternate] z-30">
-              {`</>`}
-            </span>
-            <span className="absolute bottom-5 left-0 text-2xl font-bold text-[#FDC435] animate-[float_3.5s_ease-in-out_infinite_alternate_reverse] z-30">
-              {`{ }`}
-            </span>
+            <span className="absolute top-10 right-0 text-3xl font-bold text-[#EF52FF] animate-[float_3s_ease-in-out_infinite_alternate] z-30">{`</>`}</span>
+            <span className="absolute bottom-5 left-0 text-2xl font-bold text-[#FDC435] animate-[float_3.5s_ease-in-out_infinite_alternate_reverse] z-30">{`{ }`}</span>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#EF52FF] blur-[100px] opacity-40 -z-10 rounded-full"></div>
           </div>
         </div>
 
         <div className="mt-10 flex gap-3 flex-row z-20">
-          {/* Height Container */}
           <div className="w-full md:w-2/3 h-[80vh]">
             <Virtuoso
               data={ProjectInfo}
@@ -62,7 +65,7 @@ const Project = () => {
                   <picture className="w-1/2 sm:w-[250px]">
                     <img
                       src={item?.image}
-                      alt=""
+                      alt={item?.title || "Project Thumbnail"} // Fixed Alt Tag for SEO
                       className="w-[200px] h-[100px] object-cover rounded-md"
                     />
                   </picture>
@@ -70,7 +73,7 @@ const Project = () => {
                     <h3 className="text-lg sm:text-3xl truncate font-bold">
                       {item?.title}
                     </h3>
-                    <p className="text-md sm:text-2xl sm:w-[400px] truncate text-gray-700">
+                    <p className="text-md sm:text-2xl sm:w-[350px] truncate text-gray-700">
                       {item?.description}
                     </p>
                   </div>
@@ -97,7 +100,6 @@ const Project = () => {
             className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Header */}
             <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center rounded-t-xl">
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
                 {selectedProject.title}
@@ -110,26 +112,24 @@ const Project = () => {
               </button>
             </div>
 
-            {/* Modal Content */}
             <div className="p-6">
-              {/* Project Image */}
               <div className="mb-6">
                 <img
                   src={selectedProject.image}
-                  alt={selectedProject.title}
+                  alt={selectedProject.title} // Fixed Alt Tag
                   className="w-full h-[300px] sm:h-[400px] object-cover rounded-lg shadow-md"
                 />
               </div>
 
-              {/* Project Description */}
               <div className="mb-6">
-                <h3 className="text-xl font-semibold mb-3 text-gray-800">{}</h3>
+                <h3 className="text-xl font-semibold mb-3 text-gray-800">
+                  Description
+                </h3>
                 <p className="text-gray-700 leading-relaxed">
                   {selectedProject.description}
                 </p>
               </div>
 
-              {/* Technologies Used */}
               <div className="mb-6">
                 <h3 className="text-xl font-semibold mb-3 text-gray-800">
                   Technologies Used
@@ -146,12 +146,11 @@ const Project = () => {
                 </div>
               </div>
 
-              {/* Action Buttons */}
               <div className="flex gap-4 flex-wrap">
                 <a
                   href={selectedProject.github}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer" // Important for SEO and Security
                   className="px-6 py-3 bg-[#EF52FF] text-white rounded-lg font-medium hover:bg-[#FDC435] transition-colors flex items-center gap-2"
                 >
                   <span className="text-xl">{ProjectIcon.github}</span>
@@ -160,7 +159,7 @@ const Project = () => {
                 <a
                   href={selectedProject.live}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer" // Important for SEO and Security
                   className="px-6 py-3 bg-[#EF52FF] text-white rounded-lg font-medium hover:bg-[#FDC435] transition-colors flex items-center gap-2"
                 >
                   <span className="text-xl">{ProjectIcon.live}</span>

@@ -131,7 +131,7 @@ const Mainpage = () => {
 
         {/* 2. Updated Info Icon with onClick Event */}
         <div
-          className="absolute top-[3%] right-[3%] z-20 cursor-pointer group"
+          className="absolute bottom-[1%] left-[1.5%] z-20 cursor-pointer group"
           onClick={() => setIsDevModalOpen(true)}
         >
           <span className="text-3xl text-gray-600 group-hover:text-[#FDC435] transition-colors duration-300">

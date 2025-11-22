@@ -1,13 +1,11 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet-async"; // SEO Import
 import { Virtuoso } from "react-virtuoso";
 import { FaCalendarAlt, FaUser, FaArrowRight } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import { BlogInfo } from "../Helper/Info";
 
-// Blog Data Array
-
 const Blog = () => {
-  BlogInfo;
   const [selectedBlog, setSelectedBlog] = useState(null);
 
   const handleBlogClick = (item) => {
@@ -20,6 +18,15 @@ const Blog = () => {
 
   return (
     <div className="relative w-full h-screen z-10">
+      {/* SEO Meta Tags */}
+      <Helmet>
+        <title>Blog | Ranocoder</title>
+        <meta
+          name="description"
+          content="Read technical articles and updates."
+        />
+      </Helmet>
+
       <div className="py-10 px-2 sm:px-50">
         {/* --- HEADER SECTION --- */}
         <div className="text-3xl flex items-end">
@@ -30,17 +37,14 @@ const Blog = () => {
         {/* --- BACKGROUND ANIMATION --- */}
         <div className="absolute top-30 -right-50 w-full -z-5">
           <div className="relative group mx-auto my-10 w-full max-w-[400px] aspect-square">
+            {/* Animation code remains same */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] rounded-full border-2 border-dashed border-purple-400/50 animate-[spin_20s_linear_infinite] z-0"></div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[105%] h-[105%] rounded-full border border-cyan-400/40 animate-[spin_10s_linear_infinite_reverse] z-0"></div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] animate-[spin_15s_linear_infinite] z-10 pointer-events-none">
               <div className="w-4 h-4 bg-[#ffffff] rounded-full shadow-[0_0_15px_#FDC435] absolute top-0 left-1/2 -translate-x-1/2"></div>
             </div>
-            <span className="absolute top-10 right-0 text-3xl font-bold text-[#EF52FF] animate-[float_3s_ease-in-out_infinite_alternate] z-30">
-              {`</>`}
-            </span>
-            <span className="absolute bottom-5 left-0 text-2xl font-bold text-[#FDC435] animate-[float_3.5s_ease-in-out_infinite_alternate_reverse] z-30">
-              {`{ }`}
-            </span>
+            <span className="absolute top-10 right-0 text-3xl font-bold text-[#EF52FF] animate-[float_3s_ease-in-out_infinite_alternate] z-30">{`</>`}</span>
+            <span className="absolute bottom-5 left-0 text-2xl font-bold text-[#FDC435] animate-[float_3.5s_ease-in-out_infinite_alternate_reverse] z-30">{`{ }`}</span>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#EF52FF] blur-[100px] opacity-40 -z-10 rounded-full"></div>
           </div>
         </div>
@@ -62,7 +66,7 @@ const Blog = () => {
                   <picture className="w-full sm:w-auto">
                     <img
                       src={item.image}
-                      alt={item.title}
+                      alt={item.title} // SEO: Alt tag included
                       className="w-full sm:w-[250px] h-[150px] object-cover rounded-md shadow-md"
                     />
                   </picture>
@@ -102,14 +106,14 @@ const Blog = () => {
         </div>
       </div>
 
-      {/* --- DECORATIVE VECTOR (Bottom) --- */}
+      {/* --- DECORATIVE VECTOR --- */}
       <div className="absolute -bottom-13 -left-10 opacity-100 -z-10 w-[300px] sm:w-[600px]">
         <picture>
           <div className="w-full h-32 bg-gradient-to-r from-purple-400/20 to-cyan-400/20 rounded-full blur-3xl"></div>
         </picture>
       </div>
 
-      {/* Modal */}
+      {/* Modal Code (unchanged but contextually important) */}
       {selectedBlog && (
         <div
           className="fixed inset-0 bg-[#0000008f] bg-opacity-60 flex items-center justify-center z-50 p-4"
@@ -119,7 +123,6 @@ const Blog = () => {
             className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Header */}
             <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex justify-between items-center rounded-t-xl">
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
                 {selectedBlog.title}
@@ -131,10 +134,7 @@ const Blog = () => {
                 <IoClose className="text-2xl" />
               </button>
             </div>
-
-            {/* Modal Content */}
             <div className="p-6">
-              {/* Blog Image */}
               <div className="mb-6">
                 <img
                   src={selectedBlog.image}
@@ -142,8 +142,7 @@ const Blog = () => {
                   className="w-full h-[300px] sm:h-[400px] object-cover rounded-lg shadow-md"
                 />
               </div>
-
-              {/* Blog Meta Info */}
+              {/* Rest of Modal Content */}
               <div className="mb-6 flex gap-6 text-sm text-gray-600">
                 <span className="flex items-center gap-2">
                   <FaCalendarAlt className="text-[#EF52FF]" />{" "}
@@ -156,8 +155,6 @@ const Blog = () => {
                   {selectedBlog.category}
                 </span>
               </div>
-
-              {/* Blog Full Content */}
               <div className="mb-6">
                 <h3 className="text-xl font-semibold mb-3 text-gray-800">
                   Article
@@ -166,8 +163,6 @@ const Blog = () => {
                   {selectedBlog.fullContent}
                 </p>
               </div>
-
-              {/* Tags */}
               <div className="mb-6">
                 <h3 className="text-xl font-semibold mb-3 text-gray-800">
                   Tags

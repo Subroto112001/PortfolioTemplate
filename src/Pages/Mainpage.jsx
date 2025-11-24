@@ -7,6 +7,7 @@ import { slideBarIcon } from "../Helper/Icon";
 import { IoClose } from "react-icons/io5";
 import { FaChevronLeft, FaGithub, FaLinkedin, FaGlobe } from "react-icons/fa"; // Added social icons
 import { FaCircleInfo } from "react-icons/fa6";
+import { AuthorInfo } from "../Helper/Info";
 
 const Mainpage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -119,7 +120,13 @@ const Mainpage = () => {
             animation: scaleIn 0.3s ease-out forwards;
         }
       `}</style>
-
+ <>
+        <title>Home | {AuthorInfo.name}</title>
+        <meta
+          name="description"
+          content={`Welcome to the portfolio of ${AuthorInfo.name}, a ${AuthorInfo.role}.`}
+        />
+      </>
       <div className="flex justify-between h-full relative">
         <div className="w-full md:w-[93%] h-full scrollbar-hide">
           <Outlet />
@@ -241,9 +248,7 @@ const Mainpage = () => {
             </button>
 
             <div className="text-center mt-2">
-              <div className="w-20 h-20 bg-gradient-to-tr from-[#FDC435] to-orange-400 rounded-full mx-auto flex items-center justify-center shadow-lg mb-4 text-white text-3xl font-bold">
-                {/* You can put an <img> here instead */}S
-              </div>
+            
 
               <h2 className="text-2xl font-bold text-gray-800">
                 Subroto Kumar Barman

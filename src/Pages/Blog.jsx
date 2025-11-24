@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Helmet } from "react-helmet-async"; // SEO Import
+
 import { Virtuoso } from "react-virtuoso";
 import { FaCalendarAlt, FaUser, FaArrowRight } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
@@ -19,13 +19,13 @@ const Blog = () => {
   return (
     <div className="relative w-full h-screen z-10">
       {/* SEO Meta Tags */}
-      <Helmet>
+      <>
         <title>Blog | Ranocoder</title>
         <meta
           name="description"
           content="Read technical articles and updates."
         />
-      </Helmet>
+      </>
 
       <div className="py-10 px-2 sm:px-50">
         {/* --- HEADER SECTION --- */}

@@ -1,5 +1,4 @@
-import React from "react";
-import { Helmet } from "react-helmet-async"; // SEO Import
+
 import { HeroImage } from "../Helper/Image";
 import { socialIcon } from "../Helper/Icon";
 import { AuthorInfo } from "../Helper/Info";
@@ -8,13 +7,13 @@ const Home = () => {
   return (
     <div className="px-2 md:pl-4 w-full relative z-10">
       {/* SEO Meta Tags */}
-      <Helmet>
+      <>
         <title>Home | {AuthorInfo.name}</title>
         <meta
           name="description"
           content={`Welcome to the portfolio of ${AuthorInfo.name}, a ${AuthorInfo.role}.`}
         />
-      </Helmet>
+      </>
 
       <div className="flex flex-col justify-center items-center pb-20 md:pb-0 ">
         <div className="flex flex-col md:flex-row justify-between md:gap-20 items-center mt-5 w-full">

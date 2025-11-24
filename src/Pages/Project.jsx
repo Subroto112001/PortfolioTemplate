@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Helmet } from "react-helmet-async"; // SEO Import
 import { Virtuoso } from "react-virtuoso";
 import { IoClose } from "react-icons/io5";
 import { ProjectImage, SkillImage } from "../Helper/Image";
@@ -20,13 +19,13 @@ const Project = () => {
   return (
     <div className="relative z-10">
       {/* SEO Meta Tags */}
-      <Helmet>
+      <>
         <title>Projects | Ranocoder</title>
         <meta
           name="description"
           content="Showcase of my recent web development projects and case studies."
         />
-      </Helmet>
+      </>
 
       <div className="py-10 px-2 sm:px-50">
         <div>

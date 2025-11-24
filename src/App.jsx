@@ -1,16 +1,17 @@
 import React from "react";
 import Home from "./Pages/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async"; // New Import
+
 import Mainpage from "./Pages/Mainpage";
 import Skil from "./Pages/Skil";
 import Education from "./Pages/Education";
 import Project from "./Pages/Project";
 import Blog from "./Pages/Blog";
+import { HeadProvider } from "react-head";
 
 const App = () => {
   return (
-    <HelmetProvider>
+    <HeadProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Mainpage />}>
@@ -22,7 +23,7 @@ const App = () => {
           </Route>
         </Routes>
       </BrowserRouter>
-    </HelmetProvider>
+    </HeadProvider>
   );
 };
 

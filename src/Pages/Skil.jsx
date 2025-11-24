@@ -1,8 +1,4 @@
-import React from "react";
-import { Helmet } from "react-helmet-async"; // SEO Import
-import { FaCss3Alt, FaHtml5, FaReact } from "react-icons/fa";
-import { IoLogoJavascript } from "react-icons/io";
-import { RiTailwindCssFill } from "react-icons/ri";
+
 import { SkillImage } from "../Helper/Image";
 import { BackEnd, FrontEnd } from "../Helper/Info";
 
@@ -10,13 +6,13 @@ const Skil = () => {
   return (
     <div className="relative w-full h-screen z-10">
       {/* SEO Meta Tags */}
-      <Helmet>
+      <>
         <title>Skills | Ranocoder</title>
         <meta
           name="description"
           content="Technical skills including Front-end (React, Tailwind) and Back-end technologies."
         />
-      </Helmet>
+      </>
 
       <div className="py-10 px-2 sm:px-20 md:px-50 ">
         <div className="flex flex-col ">

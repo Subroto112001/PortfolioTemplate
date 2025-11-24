@@ -1,7 +1,5 @@
 import React from "react";
-import { Helmet } from "react-helmet-async"; // SEO Import
-import { GiGraduateCap } from "react-icons/gi";
-import { GrTechnology } from "react-icons/gr";
+
 import { SkillImage } from "../Helper/Image";
 import { Virtuoso } from "react-virtuoso";
 import { educationData } from "../Helper/Info";
@@ -21,13 +19,13 @@ const Education = () => {
   return (
     <div className="py-10 px-2 sm:px-20 md:px-50 relative group z-10">
       {/* SEO Meta Tags */}
-      <Helmet>
+      <>
         <title>Education | RanoCoder</title>
         <meta
           name="description"
           content="Academic qualifications and educational background."
         />
-      </Helmet>
+      </>
 
       <div className="text-3xl flex items-end z-20">
         <span className="p-2 bg-[#FDC435]">Education</span>
